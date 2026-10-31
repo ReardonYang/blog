@@ -72,7 +72,7 @@
     });
     input.addEventListener('input', applyFilter);
     input.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { close(); btn.focus(); }
+      if (e.key === 'Escape') { e.preventDefault(); close(); btn.focus(); }
       if (e.key === 'Enter' && !list) {
         var q = input.value.trim();
         var base = input.getAttribute('data-blog-url') || '/blog/';

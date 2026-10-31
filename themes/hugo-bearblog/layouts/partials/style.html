@@ -482,6 +482,10 @@
       box-shadow: 0 10px 28px rgba(0, 0, 0, .45);
     }
 
+    html:not([data-theme="light"]) .search-backdrop {
+      background: rgba(0, 0, 0, .55);
+    }
+
     html:not([data-theme="light"]) .search-panel input {
       background: transparent;
       border-color: #2c5265;
@@ -509,6 +513,10 @@
     background: #0f3242;
     border-color: #2c5265;
     box-shadow: 0 10px 28px rgba(0, 0, 0, .45);
+  }
+
+  html[data-theme="dark"] .search-backdrop {
+    background: rgba(0, 0, 0, .55);
   }
 
   html[data-theme="dark"] .search-panel input {
