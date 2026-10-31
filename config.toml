@@ -29,6 +29,10 @@ defaultContentLanguageInSubdir = false
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
 
+# Home also emits a JSON full-text search index (layouts/index.json)
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 # Allow inline HTML in Markdown (own content only: signature alignment, halving chart)
 [markup]
   [markup.goldmark]

@@ -24,15 +24,86 @@
   })();
 </script>
 <script>
-  // Header search: icon toggles an expanding input. On the post list it
-  // filters in place; anywhere else, Enter jumps to the list with ?q=.
+  // Header search: a centered modal backed by a full-text JSON index
+  // (title + plain-text content per post, generated per language).
+  // On the post list it also filters the list in place; anywhere else,
+  // Enter without a result jumps to the list with ?q=.
   document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('search-toggle');
     var panel = document.getElementById('search-panel');
     var backdrop = document.getElementById('search-backdrop');
     var input = document.getElementById('site-search-input');
-    if (!btn || !panel || !input) return;
+    var results = document.getElementById('search-results');
+    if (!btn || !panel || !input || !results) return;
     var list = document.getElementById('post-list');
+    var indexData = null;
+    var indexCallbacks = [];
+
+    function esc(s) {
+      return s.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    function mark(text, q) {
+      if (!q) return esc(text);
+      return esc(text).replace(new RegExp('(' + escRe(esc(q)) + ')', 'gi'), '<mark>$1</mark>');
+    }
+
+    function loadIndex(done) {
+      if (indexData) { done(); return; }
+      indexCallbacks.push(done);
+      if (indexCallbacks.length > 1) return;
+      fetch(input.getAttribute('data-index-url'))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          indexData = d;
+          var cbs = indexCallbacks; indexCallbacks = [];
+          cbs.forEach(function (f) { f(); });
+        })
+        .catch(function () { indexCallbacks = []; });
+    }
+
+    function searchPosts(q) {
+      var titleHits = [], bodyHits = [];
+      indexData.forEach(function (p) {
+        var t = p.title.toLowerCase(), c = (p.content || '').toLowerCase();
+        if (t.indexOf(q) !== -1) titleHits.push(p);
+        else if (c.indexOf(q) !== -1) bodyHits.push(p);
+      });
+      return titleHits.concat(bodyHits);
+    }
+
+    function snippet(p, q) {
+      var c = p.content || '';
+      var i = c.toLowerCase().indexOf(q);
+      if (i === -1) return c.slice(0, 90);
+      var start = Math.max(0, i - 38), end = Math.min(c.length, i + q.length + 52);
+      return (start > 0 ? '\u2026' : '') + c.slice(start, end).trim() + (end < c.length ? '\u2026' : '');
+    }
+
+    function renderResults() {
+      var q = input.value.trim().toLowerCase();
+      if (!q || !indexData) {
+        results.className = 'search-results';
+        results.innerHTML = '';
+        return;
+      }
+      var hits = searchPosts(q);
+      if (!hits.length) {
+        results.className = 'search-results is-empty';
+        results.innerHTML = '<div class="search-none">' + esc(input.getAttribute('data-no-result') || '') + '</div>';
+        return;
+      }
+      results.className = 'search-results has-items';
+      results.innerHTML = hits.slice(0, 8).map(function (p) {
+        var meta = p.date + (p.tags && p.tags.length ? ' \u00b7 ' + p.tags.join(' / ') : '');
+        return '<a class="search-result" href="' + p.url + '">' +
+          '<span class="r-title">' + mark(p.title, q) + '</span>' +
+          '<span class="r-meta">' + esc(meta) + '</span>' +
+          '<span class="r-snippet">' + mark(snippet(p, q), q) + '</span></a>';
+      }).join('');
+    }
 
     function applyFilter() {
       if (!list) return;
@@ -41,8 +112,18 @@
       var seps = list.querySelectorAll('li.year-sep');
       var empty = document.getElementById('no-result');
       var visible = 0;
+      var matchUrls = null;
+      if (q && indexData) {
+        matchUrls = {};
+        searchPosts(q).forEach(function (p) { matchUrls[p.url] = true; });
+      }
       items.forEach(function (li) {
-        var hit = !q || li.getAttribute('data-search').indexOf(q) !== -1;
+        var hit;
+        if (!q) hit = true;
+        else if (matchUrls) {
+          var a = li.querySelector('a');
+          hit = !!(a && matchUrls[a.getAttribute('href')]);
+        } else hit = li.getAttribute('data-search').indexOf(q) !== -1;
         li.style.display = hit ? '' : 'none';
         if (hit) visible++;
       });
@@ -50,11 +131,14 @@
       if (empty) empty.style.display = (q && visible === 0) ? 'flex' : 'none';
     }
 
+    function refresh() { renderResults(); applyFilter(); }
+
     function open() {
       panel.classList.add('open');
       if (backdrop) backdrop.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
       input.focus();
+      loadIndex(refresh);
     }
     function close() {
       panel.classList.remove('open');
@@ -70,21 +154,33 @@
         close();
       }
     });
-    input.addEventListener('input', applyFilter);
+    input.addEventListener('input', function () {
+      if (indexData) refresh();
+      else { applyFilter(); loadIndex(refresh); }
+    });
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { e.preventDefault(); close(); btn.focus(); }
-      if (e.key === 'Enter' && !list) {
-        var q = input.value.trim();
-        var base = input.getAttribute('data-blog-url') || '/blog/';
-        if (base.charAt(base.length - 1) !== '/') base += '/';
-        window.location.href = base + (q ? '?q=' + encodeURIComponent(q) : '');
+      if (e.key === 'Enter') {
+        var first = results.querySelector('.search-result');
+        if (first && results.classList.contains('has-items')) {
+          window.location.href = first.getAttribute('href');
+          return;
+        }
+        if (!list) {
+          var base = input.getAttribute('data-blog-url') || '/blog/';
+          if (base.charAt(base.length - 1) !== '/') base += '/';
+          var q = input.value.trim();
+          window.location.href = base + (q ? '?q=' + encodeURIComponent(q) : '');
+        } else {
+          close();
+        }
       }
     });
 
     // Arriving with ?q= (e.g. from another page): open and filter.
     if (list) {
       var q0 = new URLSearchParams(window.location.search).get('q');
-      if (q0) { input.value = q0; open(); applyFilter(); }
+      if (q0) { input.value = q0; open(); }
     }
   });
 </script>
