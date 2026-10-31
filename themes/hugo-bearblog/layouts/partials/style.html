@@ -134,7 +134,7 @@
   .site-head {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .theme-toggle {
@@ -177,26 +177,31 @@
   /* header action icons (search + theme) */
   .head-actions {
     display: flex;
-    align-items: flex-start;
-    gap: 6px;
+    align-items: center;
+    gap: 4px;
   }
 
   .icon-btn {
     background: none;
     border: 0;
     cursor: pointer;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     line-height: 0;
-    padding: 6px 2px;
     color: #8a8a8a;
   }
 
   .lang-btn {
-    display: inline-block;
+    width: auto;
+    padding: 0 6px;
     font-size: 13.5px;
     letter-spacing: .03em;
     text-decoration: none;
-    line-height: 21px;
-    padding-top: 8px;
+    line-height: 1;
   }
 
   /* floating header search */
