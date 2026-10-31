@@ -174,13 +174,47 @@
     padding: 14px 0 4px;
   }
 
-  /* post search */
-  .post-search {
-    position: relative;
-    margin: 10px 0 18px;
+  /* header action icons (search + theme) */
+  .head-actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
   }
 
-  .post-search svg {
+  .icon-btn {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+    padding: 6px 2px;
+    color: #8a8a8a;
+  }
+
+  /* expanding header search */
+  .search-panel {
+    display: none;
+    position: relative;
+    margin: 12px 0 4px;
+  }
+
+  .search-panel.open {
+    display: block;
+    animation: search-in .18s ease;
+  }
+
+  @keyframes search-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .search-panel svg {
     position: absolute;
     left: 11px;
     top: 50%;
@@ -189,7 +223,7 @@
     pointer-events: none;
   }
 
-  .post-search input {
+  .search-panel input {
     width: 100%;
     box-sizing: border-box;
     padding: 9px 12px 9px 36px;
@@ -200,11 +234,11 @@
     font-size: 15px;
   }
 
-  .post-search input::placeholder {
+  .search-panel input::placeholder {
     color: #aaa;
   }
 
-  .post-search input:focus {
+  .search-panel input:focus {
     outline: none;
     border-color: #1e4d3a;
     background: #fff;
@@ -322,7 +356,7 @@
       border-color: #2c5265;
     }
 
-    html:not([data-theme="light"]) .post-search input {
+    html:not([data-theme="light"]) .search-panel input {
       border-color: #2c5265;
     }
   }
@@ -384,7 +418,7 @@
     border-color: #2c5265;
   }
 
-  html[data-theme="dark"] .post-search input {
+  html[data-theme="dark"] .search-panel input {
     border-color: #2c5265;
   }
 
@@ -401,12 +435,12 @@
       border-top-color: rgba(213, 226, 231, .35);
     }
 
-    html:not([data-theme="light"]) .post-search input {
+    html:not([data-theme="light"]) .search-panel input {
       background: rgba(255, 255, 255, .05);
       border-color: #2c5265;
     }
 
-    html:not([data-theme="light"]) .post-search input:focus {
+    html:not([data-theme="light"]) .search-panel input:focus {
       border-color: #8cc2dd;
       background: rgba(255, 255, 255, .05);
     }
@@ -424,11 +458,11 @@
     border-top-color: rgba(213, 226, 231, .35);
   }
 
-  html[data-theme="dark"] .post-search input {
+  html[data-theme="dark"] .search-panel input {
     background: rgba(255, 255, 255, .05);
   }
 
-  html[data-theme="dark"] .post-search input:focus {
+  html[data-theme="dark"] .search-panel input:focus {
     border-color: #8cc2dd;
     background: rgba(255, 255, 255, .05);
   }

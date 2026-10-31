@@ -23,6 +23,62 @@
     });
   })();
 </script>
+<script>
+  // Header search: icon toggles an expanding input. On the post list it
+  // filters in place; anywhere else, Enter jumps to the list with ?q=.
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('search-toggle');
+    var panel = document.getElementById('search-panel');
+    var input = document.getElementById('site-search-input');
+    if (!btn || !panel || !input) return;
+    var list = document.getElementById('post-list');
+
+    function applyFilter() {
+      if (!list) return;
+      var q = input.value.trim().toLowerCase();
+      var items = list.querySelectorAll('li[data-search]');
+      var seps = list.querySelectorAll('li.year-sep');
+      var empty = document.getElementById('no-result');
+      var visible = 0;
+      items.forEach(function (li) {
+        var hit = !q || li.getAttribute('data-search').indexOf(q) !== -1;
+        li.style.display = hit ? '' : 'none';
+        if (hit) visible++;
+      });
+      seps.forEach(function (li) { li.style.display = q ? 'none' : ''; });
+      if (empty) empty.style.display = (q && visible === 0) ? 'flex' : 'none';
+    }
+
+    function open() {
+      panel.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      input.focus();
+    }
+    function close() {
+      panel.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (list) { input.value = ''; applyFilter(); }
+    }
+
+    btn.addEventListener('click', function () {
+      panel.classList.contains('open') ? close() : open();
+    });
+    input.addEventListener('input', applyFilter);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); btn.focus(); }
+      if (e.key === 'Enter' && !list) {
+        var q = input.value.trim();
+        window.location.href = '/blog/' + (q ? '?q=' + encodeURIComponent(q) : '');
+      }
+    });
+
+    // Arriving with ?q= (e.g. from another page): open and filter.
+    if (list) {
+      var q0 = new URLSearchParams(window.location.search).get('q');
+      if (q0) { input.value = q0; open(); applyFilter(); }
+    }
+  });
+</script>
 <link rel="canonical" href="{{ .Permalink }}" />
 {{- if and (eq .Type "blog") .IsPage }}
 {{- $ld := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" .Title "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" (dict "@type" "Person" "name" "Reardon Yang" "url" "https://reardon.torrdex.com/") "description" (.Summary | plainify | truncate 150) "url" .Permalink "mainEntityOfPage" .Permalink "inLanguage" "zh-CN" }}

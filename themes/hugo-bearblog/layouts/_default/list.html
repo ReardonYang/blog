@@ -5,11 +5,6 @@
   <small>
     <a href="{{ "/category" | relURL }}">--返回文章分类</a>
   </small>
-  {{ else if eq .Type "blog" }}
-  <div class="post-search">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="search" id="post-search-input" placeholder="搜索文章…" aria-label="搜索文章" autocomplete="off">
-  </div>
   {{ end }}
   <ul class="blog-posts" id="post-list">
     {{ $lastYear := "" }}
@@ -47,27 +42,4 @@
     </small>
     {{ end }}
 </content>
-{{ if and (eq .Type "blog") (not .Data.Singular) }}
-<script>
-  (function () {
-    var input = document.getElementById('post-search-input');
-    var list = document.getElementById('post-list');
-    if (!input || !list) return;
-    var items = Array.prototype.slice.call(list.querySelectorAll('li[data-search]'));
-    var seps = Array.prototype.slice.call(list.querySelectorAll('li.year-sep'));
-    var empty = document.getElementById('no-result');
-    input.addEventListener('input', function () {
-      var q = input.value.trim().toLowerCase();
-      var visible = 0;
-      items.forEach(function (li) {
-        var hit = !q || li.getAttribute('data-search').indexOf(q) !== -1;
-        li.style.display = hit ? '' : 'none';
-        if (hit) visible++;
-      });
-      seps.forEach(function (li) { li.style.display = q ? 'none' : ''; });
-      if (empty) empty.style.display = (q && visible === 0) ? 'flex' : 'none';
-    });
-  })();
-</script>
-{{ end }}
 {{ end }}
