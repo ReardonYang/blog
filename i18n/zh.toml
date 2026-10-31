@@ -1,0 +1,23 @@
+[home]
+other = "首页"
+
+[all_posts]
+other = "全部文章"
+
+[search_label]
+other = "搜索文章"
+
+[search_placeholder]
+other = "搜索文章…"
+
+[theme_label]
+other = "切换日间/夜间主题"
+
+[no_result]
+other = "没有找到匹配的文章"
+
+[reading_time]
+other = "阅读"
+
+[words]
+other = "字"

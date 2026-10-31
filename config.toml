@@ -9,6 +9,18 @@ title = "Reardon"
 author = "Reardon Yang"
 copyright = "Copyright © 2021, Reardon Yang."
 languageCode = "zh-CN"
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.zh]
+    languageCode = "zh-CN"
+    weight = 1
+  [languages.en]
+    languageCode = "en-US"
+    weight = 2
+    [languages.en.params]
+      description = "Reardon's personal blog: daily fragments, hard-won lessons and interesting things — home of the Bitcoin Talk series, Bitcoin micro-fiction and life essays."
 
 # Reardon insert from here
 # v0.88.1

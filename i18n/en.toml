@@ -1,0 +1,23 @@
+[home]
+other = "Home"
+
+[all_posts]
+other = "All Posts"
+
+[search_label]
+other = "Search posts"
+
+[search_placeholder]
+other = "Search posts…"
+
+[theme_label]
+other = "Switch light/dark theme"
+
+[no_result]
+other = "No matching posts"
+
+[reading_time]
+other = "min read"
+
+[words]
+other = "words"

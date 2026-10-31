@@ -16,8 +16,8 @@ menu = "main"
 * 伊隆·马斯克关于比特币\加密货币\狗狗币的观点汇总
 
 ->**持续更新的内容** 🔥
-* [闲话比特币](https://reardonyang.com/blog/%E9%97%B2%E8%AF%9D%E6%AF%94%E7%89%B9%E5%B8%81/)
-* [比特币微科幻](https://reardonyang.com/blog/%E6%AF%94%E7%89%B9%E5%B8%81%E5%BE%AE%E7%A7%91%E5%B9%BB/)
+* [闲话比特币](https://reardon.torrdex.com/blog/%E9%97%B2%E8%AF%9D%E6%AF%94%E7%89%B9%E5%B8%81/)
+* [比特币微科幻](https://reardon.torrdex.com/blog/%E6%AF%94%E7%89%B9%E5%B8%81%E5%BE%AE%E7%A7%91%E5%B9%BB/)
 * 中本聪文集（电子邮件、论坛帖子、代码、白皮书）
 
 ->**远期可能会加入的内容** 😴

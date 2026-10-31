@@ -58,7 +58,7 @@ tags = [
 * 阅读：[比特币白皮书](https://github.com/ReardonYang/ReardonYang.github.io/blob/master/bitcoin.pdf)
 ![bitcoin-paper](/images/build-your-personal-bitcoin-node/bitcoin-paper.png) | [下载](https://github.com/ReardonYang/ReardonYang.github.io/raw/master/bitcoin.pdf)
 * 关注我：[Twitter](https://twitter.com/ReardonYang) || [豆瓣](https://www.douban.com/people/57644512/) ；
-* **阅读**我写的[关于比特币的文章](https://reardonyang.com/blog/)；
+* **阅读**我写的[关于比特币的文章](https://reardon.torrdex.com/blog/)；
 * 关注：[Michael Saylor](https://twitter.com/saylor) 和 [Andreas M. Antonopoulos](https://twitter.com/aantonop)；
 * **睡觉** 💤
 

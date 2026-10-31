@@ -63,12 +63,19 @@
     btn.addEventListener('click', function () {
       panel.classList.contains('open') ? close() : open();
     });
+    document.addEventListener('click', function (e) {
+      if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) {
+        close();
+      }
+    });
     input.addEventListener('input', applyFilter);
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { close(); btn.focus(); }
       if (e.key === 'Enter' && !list) {
         var q = input.value.trim();
-        window.location.href = '/blog/' + (q ? '?q=' + encodeURIComponent(q) : '');
+        var base = input.getAttribute('data-blog-url') || '/blog/';
+        if (base.charAt(base.length - 1) !== '/') base += '/';
+        window.location.href = base + (q ? '?q=' + encodeURIComponent(q) : '');
       }
     });
 
@@ -79,7 +86,8 @@
     }
   });
 </script>
-<link rel="canonical" href="{{ .Permalink }}" />
+{{ range .AllTranslations }}<link rel="alternate" hreflang="{{ if eq .Language.Lang "en" }}en-US{{ else }}zh-CN{{ end }}" href="{{ .Permalink }}" />
+{{ end }}<link rel="canonical" href="{{ .Permalink }}" />
 {{- if and (eq .Type "blog") .IsPage }}
 {{- $ld := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" .Title "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" (dict "@type" "Person" "name" "Reardon Yang" "url" "https://reardon.torrdex.com/") "description" (.Summary | plainify | truncate 150) "url" .Permalink "mainEntityOfPage" .Permalink "inLanguage" "zh-CN" }}
 <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
