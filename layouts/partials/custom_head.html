@@ -105,6 +105,12 @@
       }).join('');
     }
 
+    function normUrl(u) {
+      try { u = new URL(u, window.location.origin).pathname; } catch (e) {}
+      try { u = decodeURIComponent(u); } catch (e) {}
+      return u;
+    }
+
     function applyFilter() {
       if (!list) return;
       var q = input.value.trim().toLowerCase();
@@ -115,14 +121,14 @@
       var matchUrls = null;
       if (q && indexData) {
         matchUrls = {};
-        searchPosts(q).forEach(function (p) { matchUrls[p.url] = true; });
+        searchPosts(q).forEach(function (p) { matchUrls[normUrl(p.url)] = true; });
       }
       items.forEach(function (li) {
         var hit;
         if (!q) hit = true;
         else if (matchUrls) {
           var a = li.querySelector('a');
-          hit = !!(a && matchUrls[a.getAttribute('href')]);
+          hit = !!(a && matchUrls[normUrl(a.getAttribute('href'))]);
         } else hit = li.getAttribute('data-search').indexOf(q) !== -1;
         li.style.display = hit ? '' : 'none';
         if (hit) visible++;

@@ -3,7 +3,7 @@
 
 ---
 
-![reardon](/images/reardon.jpg)
+![reardon](/images/reardon.webp)
 
 💖 我是**Reardon**，这里会记录一些日常琐碎，经验心得，以及一些有趣的事情。我希望通过写文章的方式，进行更加**细致和深入**的思考。
 

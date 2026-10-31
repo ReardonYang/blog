@@ -3,7 +3,7 @@
 
 ---
 
-![reardon](/images/reardon.jpg)
+![reardon](/images/reardon.webp)
 
 💖 I am **Reardon**. Here I record daily fragments, hard-won lessons, and things I find interesting. By writing, I hope to think **more carefully and more deeply**.
 
