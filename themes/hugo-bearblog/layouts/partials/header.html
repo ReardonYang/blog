@@ -1,6 +1,9 @@
-<a href="{{ "/" | relURL }}" class="title">
-  <h2>{{ .Site.Title }}</h2>
-</a>
+<div class="site-head">
+  <a href="{{ "/" | relURL }}" class="title">
+    <h2>{{ .Site.Title }}</h2>
+  </a>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换日间/夜间主题">☾</button>
+</div>
 <nav>{{- partial "nav.html" . -}}</nav>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

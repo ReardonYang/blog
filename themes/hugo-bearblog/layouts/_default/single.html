@@ -17,4 +17,20 @@
   <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
   {{ end }}
 </p>
+{{ if eq .Type "blog" }}
+{{ $all := sort (where .Site.RegularPages "Type" "blog") "Date" "desc" }}
+{{ $idx := -1 }}
+{{ range $i, $p := $all }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
+{{ if ge $idx 0 }}
+{{ $older := false }}{{ $newer := false }}
+{{ if lt (add $idx 1) (len $all) }}{{ $older = index $all (add $idx 1) }}{{ end }}
+{{ if gt $idx 0 }}{{ $newer = index $all (sub $idx 1) }}{{ end }}
+{{ if or $older $newer }}
+<nav class="post-nav">
+  <span class="nav-prev">{{ with $older }}<a href="{{ .Permalink }}">← {{ .Title }}</a>{{ end }}</span>
+  <span class="nav-next">{{ with $newer }}<a href="{{ .Permalink }}">{{ .Title }} →</a>{{ end }}</span>
+</nav>
+{{ end }}
+{{ end }}
+{{ end }}
 {{ end }}

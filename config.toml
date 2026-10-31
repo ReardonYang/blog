@@ -17,6 +17,12 @@ languageCode = "zh-CN"
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
 
+# Allow inline HTML in Markdown (own content only: signature alignment, halving chart)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 # Generate "Bearblog"-like URLs !only!, see https://bearblog.dev/.
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]

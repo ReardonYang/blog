@@ -6,6 +6,6 @@ tags = [
 ]
 +++
 
-![freedom](/images/freedom.png)
+![freedom](/images/freedom.jpg)
 
  

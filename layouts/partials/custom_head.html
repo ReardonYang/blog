@@ -1,3 +1,28 @@
+<script>
+  // Theme: stored choice wins, otherwise follow the system. Runs before paint.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'dark' && t !== 'light') {
+      t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', t);
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      var sync = function () {
+        btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+      };
+      sync();
+      btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        sync();
+      });
+    });
+  })();
+</script>
 <link rel="canonical" href="{{ .Permalink }}" />
 {{- if and (eq .Type "blog") .IsPage }}
 {{- $ld := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" .Title "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" (dict "@type" "Person" "name" "Reardon Yang" "url" "https://reardon.torrdex.com/") "description" (.Summary | plainify | truncate 150) "url" .Permalink "mainEntityOfPage" .Permalink "inLanguage" "zh-CN" }}
