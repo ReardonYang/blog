@@ -141,14 +141,27 @@
     background: none;
     border: 0;
     cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
+    line-height: 0;
     padding: 6px 2px;
-    color: #999;
+    color: #8a8a8a;
   }
 
-  .theme-toggle:hover {
-    color: #3273dc;
+  .theme-toggle svg {
+    display: none;
+  }
+
+  .theme-toggle[data-mode="light"] .icon-sun {
+    display: block;
+  }
+
+  .theme-toggle[data-mode="dark"] .icon-moon {
+    display: block;
+    color: #9db6bf;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed #bbb;
   }
 
   /* year separator in the post list */
@@ -163,22 +176,38 @@
 
   /* post search */
   .post-search {
-    margin: 6px 0 14px;
+    position: relative;
+    margin: 10px 0 18px;
+  }
+
+  .post-search svg {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
   }
 
   .post-search input {
     width: 100%;
     box-sizing: border-box;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
+    padding: 9px 12px 9px 36px;
+    border: 1px solid #ddd;
     border-radius: 0;
-    background: transparent;
+    background: #fafafa;
     color: inherit;
+    font-size: 15px;
+  }
+
+  .post-search input::placeholder {
+    color: #aaa;
   }
 
   .post-search input:focus {
-    outline: 1px solid #3273dc;
+    outline: none;
     border-color: #3273dc;
+    background: #fff;
   }
 
   ul.blog-posts li.no-result {
@@ -256,7 +285,7 @@
 
   @media (prefers-color-scheme: dark) {
     html:not([data-theme="light"]) body {
-      background-color: #0e2d3b;
+      background-color: #0a2a38;
       color: #d5e2e7;
     }
 
@@ -324,7 +353,7 @@
   }
 
   html[data-theme="dark"] body {
-    background-color: #0e2d3b;
+    background-color: #0a2a38;
     color: #d5e2e7;
   }
 
@@ -388,6 +417,51 @@
 
   html[data-theme="dark"] .post-search input {
     border-color: #2c5265;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) hr {
+      border-top-color: rgba(213, 226, 231, .35);
+    }
+
+    html:not([data-theme="light"]) blockquote {
+      border-left-color: rgba(213, 226, 231, .4);
+    }
+
+    html:not([data-theme="light"]) .post-nav {
+      border-top-color: rgba(213, 226, 231, .35);
+    }
+
+    html:not([data-theme="light"]) .post-search input {
+      background: rgba(255, 255, 255, .05);
+      border-color: #2c5265;
+    }
+
+    html:not([data-theme="light"]) .post-search input:focus {
+      border-color: #8cc2dd;
+      background: rgba(255, 255, 255, .05);
+    }
+  }
+
+  html[data-theme="dark"] hr {
+    border-top-color: rgba(213, 226, 231, .35);
+  }
+
+  html[data-theme="dark"] blockquote {
+    border-left-color: rgba(213, 226, 231, .4);
+  }
+
+  html[data-theme="dark"] .post-nav {
+    border-top-color: rgba(213, 226, 231, .35);
+  }
+
+  html[data-theme="dark"] .post-search input {
+    background: rgba(255, 255, 255, .05);
+  }
+
+  html[data-theme="dark"] .post-search input:focus {
+    border-color: #8cc2dd;
+    background: rgba(255, 255, 255, .05);
   }
 
 </style>
