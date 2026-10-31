@@ -1,5 +1,5 @@
 
-baseURL = "https://reardonyang.com"
+baseURL = "https://reardon.torrdex.com/"
 
 # The name of this wonderful theme ;-).
 theme = 'hugo-bearblog'
@@ -26,7 +26,7 @@ ignoreErrors = ["error-disable-taxonomy"]
 
 [params]
   # The "description" of your website. This is used in the meta data of your generated html.
-  description = "Reardon"
+  description = "Reardon 的个人博客：记录日常琐碎、经验心得与有趣的事情，含闲话比特币系列、比特币微科幻与生活随笔。"
 
   # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
   # Hint: It's good practise to also put a "favicon.ico"-file into your "static"-folder.

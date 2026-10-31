@@ -3,6 +3,7 @@ title = "阴影"
 date = "2019-07-21"
 tags = [
     "生活点滴",
+    "精华转载",
 ]
 +++
 
@@ -30,4 +31,4 @@ You've always shared my darkest hours
 
 I'll miss you when I go
 
----
+ 

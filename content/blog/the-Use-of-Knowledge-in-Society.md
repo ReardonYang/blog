@@ -182,4 +182,4 @@ tags = [
 
 `① J. Schumpeter, Capitalism, Socialism, and Democracy (New York; Harper, 1942), p. 175. Professor Schumpeter is, I believe, also the original author of the myth that Pareto and Barone have "solved" the problem of socialist calculation. What they, and many others, did was merely to state the conditions which a rational allocation of resources would have to satisfy and to point out that these were essentially the same as the conditions of equilibrium of a competitive market. This is something altogether different from knowing how the allocation of resources satisfying these conditions can be found in practice. Pareto himself (from whom Barone has taken practically everything he has to say), far from claiming to have solved the practical problem, in fact explicitly denies that it can be solved without the help of the market. See his Manuel d'économie pure (2d ed., 1927), pp. 233-34. The relevant passage is quoted in an English translation at the beginning of my article on "Socialist Calculation: The Competitive 'Solution,' " in Economica, New Series, Vol. VIII, No. 26 (May, 1940), p. 125.`
 
----
+ 

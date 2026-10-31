@@ -11,10 +11,10 @@
 {{ end }}{{ end }}
 <content>
   {{ .Content }}
-  <p>
-    {{ range (.GetTerms "tags") }}
-    <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
-    {{ end }}
-  </p>
 </content>
+<p>
+  {{ range (.GetTerms "tags") }}
+  <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+  {{ end }}
+</p>
 {{ end }}

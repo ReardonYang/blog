@@ -13,7 +13,7 @@
 * [Twitter](https://twitter.com/ReardonYang)
 * [Github](https://github.com/ReardonYang)
 
-🪙 如果喜欢我的文字，欢迎打赏：
+🔥 如果喜欢我的文字，欢迎打赏：
 
 * bitcoin：`321sCmLJoqDCARmngJqhPiomBbs2BBxuXy`
 * dogecoin：`DAsdYRZXtDZBstn4Qu3EkRnJr9g3EwRemv`

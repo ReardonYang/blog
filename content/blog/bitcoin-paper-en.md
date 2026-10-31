@@ -48,4 +48,4 @@ tags = [
 
 ![bitcoin-9](/images/bitcoin-paper/bitcoin-9.jpg)
 
----
+ 
