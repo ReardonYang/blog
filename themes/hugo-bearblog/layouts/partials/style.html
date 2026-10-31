@@ -234,36 +234,17 @@
     margin-left: auto;
   }
 
-  /* halving page */
-  .halving-table {
+  /* content tables (e.g. halving schedule) */
+  content table {
     border-collapse: collapse;
     font-size: 14px;
   }
 
-  .halving-table th,
-  .halving-table td {
+  content table th,
+  content table td {
     padding: 6px 8px;
     border-bottom: 1px solid #e5e5e5;
     text-align: left;
-  }
-
-  .halving-table td.num,
-  .halving-table th.num {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .halving-table tr.done td {
-    color: #222;
-  }
-
-  .halving-table tr.future td {
-    color: #888;
-  }
-
-  .chart-wrap {
-    overflow-x: auto;
-    margin: 18px 0 6px;
   }
 
   /* whitepaper pages */
@@ -330,18 +311,12 @@
       color: #9db6bf;
     }
 
-    html:not([data-theme="light"]) .halving-table th,
-    html:not([data-theme="light"]) .halving-table td {
+    html:not([data-theme="light"]) content table th,
+    html:not([data-theme="light"]) content table td {
       border-bottom-color: #2c5265;
     }
 
-    html:not([data-theme="light"]) .halving-table tr.done td {
-      color: #eef6f8;
-    }
 
-    html:not([data-theme="light"]) .halving-table tr.future td {
-      color: #8fa8b1;
-    }
 
     html:not([data-theme="light"]) .paper-page img {
       border-color: #2c5265;
@@ -398,18 +373,12 @@
     color: #9db6bf;
   }
 
-  html[data-theme="dark"] .halving-table th,
-  html[data-theme="dark"] .halving-table td {
+  html[data-theme="dark"] content table th,
+  html[data-theme="dark"] content table td {
     border-bottom-color: #2c5265;
   }
 
-  html[data-theme="dark"] .halving-table tr.done td {
-    color: #eef6f8;
-  }
 
-  html[data-theme="dark"] .halving-table tr.future td {
-    color: #8fa8b1;
-  }
 
   html[data-theme="dark"] .paper-page img {
     border-color: #2c5265;
